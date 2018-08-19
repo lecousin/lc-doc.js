@@ -1,0 +1,34 @@
+<h1>{{name}}</h1>
+
+{{description}}
+
+{{if typeof methods != 'undefined'}}
+<div>
+	<h1>Methods</h1>
+	<table>
+		<tr><th>Method</th><th>Description</th>
+		{{foreach methods m}}
+		<tr>
+			<td>{{m.name}}</td>
+			<td>{{m.description}}</td>
+		</tr>
+		{{endforeach}}
+	</table>
+</div>
+{{endif}}
+
+{{filter children child classes child.type == 'class'}}
+{{if classes.length > 0}}
+<div>
+	<h1>Classes</h1>
+	<table>
+		<tr><th>Class</th><th>Description</th>
+		{{foreach classes c}}
+		<tr>
+			<td><a href="#" onclick="lcdoc.showById({{c.id}}); return false">{{c.name}}</a></td>
+			<td>{{c.description}}</td>
+		</tr>
+		{{endforeach}}
+	</table>
+</div>
+{{endif}}

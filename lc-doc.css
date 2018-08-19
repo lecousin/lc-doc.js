@@ -1,0 +1,101 @@
+.lc-doc {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+}
+
+.lc-doc .lc-doc-tree {
+	flex: none;
+	border-right: 1px solid black;
+	padding: 5px;
+}
+
+.lc-doc .lc-doc-tree a {
+	text-decoration: none;
+	color: #3f87a6;
+	font-family: consolas,"Liberation Mono",courier,monospace;
+	white-space: nowrap;
+	font-size: 10pt;
+}
+
+.lc-doc .lc-doc-tree a:hover {
+	text-decoration: underline;
+	color: #226D8C;
+}
+
+.lc-doc .lc-doc-tree-node {
+	display: flex;
+	align-items: center;
+	margin: 2px 0px;
+}
+
+.lc-doc .lc-doc-tree-node .lc-doc-tree-node-icon {
+	width: 16px;
+	height: 16px;
+	background-repeat: norepeat;
+	position: relative;
+}
+
+.lc-doc .lc-doc-tree-node.lc-doc-namespace .lc-doc-tree-node-icon {
+	background-image: url("images/namespace.gif");
+}
+.lc-doc .lc-doc-tree-node.lc-doc-class .lc-doc-tree-node-icon {
+	background-image: url("images/class.png");
+}
+.lc-doc .lc-doc-tree-node.lc-doc-method .lc-doc-tree-node-icon {
+	background-image: url("images/method.gif");
+}
+.lc-doc .lc-doc-tree-node.lc-doc-attribute .lc-doc-tree-node-icon {
+	background-image: url("images/attribute.png");
+}
+.lc-doc .lc-doc-tree-node.lc-doc-event .lc-doc-tree-node-icon {
+	background-image: url("images/event.gif");
+}
+
+.lc-doc .lc-doc-tree-node.lc-doc-static .lc-doc-tree-node-icon:before {
+	content: '';
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	background-image: url("images/static.png");
+	background-repeat: norepeat;
+	width: 7px;
+	height: 7px;
+}
+.lc-doc .lc-doc-tree-node.lc-doc-static {
+	font-style: italic;
+}
+
+.lc-doc .lc-doc-tree-node.lc-doc-tree-node-expanded, .lc-doc .lc-doc-tree-node.lc-doc-tree-node-collapsed {
+	margin-left: 12px;
+}
+
+.lc-doc .lc-doc-tree-node .lc-doc-tree-node-expand-button {
+	background-repeat: no-repeat;
+	width: 9px;
+	height: 11px;
+}
+
+.lc-doc .lc-doc-tree-node .lc-doc-tree-node-expand-button.lc-doc-tree-node-expanded {
+	background-image: url("images/tree_node_expanded.png");
+}
+.lc-doc .lc-doc-tree-node .lc-doc-tree-node-expand-button.lc-doc-tree-node-collapsed {
+	background-image: url("images/tree_node_collapsed.png");
+}
+
+.lc-doc .lc-doc-tree .lc-doc-tree-node-content {
+	margin-left: 16px;
+}
+
+.lc-doc .lc-doc-tree .lc-doc-tree-node-content.lc-doc-tree-node-content-expanded {
+	display: block;
+	margin-left: 25px;
+}
+.lc-doc .lc-doc-tree .lc-doc-tree-node-content.lc-doc-tree-node-content-collapsed {
+	display: none;
+}
+
+.lc-doc .lc-doc-content {
+	flex: 1 1 100%;
+	padding: 5px;
+}
