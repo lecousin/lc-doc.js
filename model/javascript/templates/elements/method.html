@@ -1,0 +1,45 @@
+{{$filter content c parameters c.type == 'parameter'}}
+{{$filter content c returns c.type == 'return'}}
+
+<div class="lc-doc-method">
+	<code>
+	{{name}}({{$foreach parameters param}}{{$if paramIndex &gt; 0}}, {{endif}}{{param.pname}}{{endforeach}})
+	</code>
+	
+	{{$if description}}
+	<div class="lc-doc-description">
+		<h1>Description</h1>
+		<div>
+		{{description}}
+		</div>
+	</div>
+	{{endif}}
+	
+	{{$if parameters.length > 0}}
+	<div class="lc-doc-parameters">
+		<h1>Parameters</h1>
+		<table>
+			<tr><th>Name</th><th>Type</th><th>Description</th></tr>
+			{{$foreach parameters param}}
+			<tr>
+				<td>{{param.pname}}</td>
+				<td>{{param.ptype}}</td>
+				<td>{{param.description}}</td>
+			</tr>
+			{{endforeach}}
+		</table>
+	</div>
+	{{endif}}
+	
+	{{$if returns.length > 0}}
+	<div class="lc-doc-return">
+		<h1>Return</h1>
+		<div>
+			Type: {{returns[0].type}}
+		</div>
+		<div>
+			{{returns[0].description}}
+		</div>
+	</div>
+	{{endif}}
+</div>

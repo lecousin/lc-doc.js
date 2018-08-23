@@ -1,0 +1,36 @@
+{{$filter children c methods c.type == 'method'}}
+{{$filter children child classes child.type == 'class'}}
+
+<h1>{{name}}</h1>
+
+{{description}}
+
+{{$if methods.length > 0}}
+<div>
+	<h1>Methods</h1>
+	<table>
+		<tr><th>Method</th><th>Description</th>
+		{{$foreach methods m}}
+		<tr>
+			<td>{{m.name}}</td>
+			<td>{{m.description}}</td>
+		</tr>
+		{{endforeach}}
+	</table>
+</div>
+{{endif}}
+
+{{$if classes.length > 0}}
+<div>
+	<h1>Classes</h1>
+	<table>
+		<tr><th>Class</th><th>Description</th>
+		{{$foreach classes c}}
+		<tr>
+			<td><a href="{{c.fullpath}}.html">{{c.name}}</a></td>
+			<td>{{c.description}}</td>
+		</tr>
+		{{endforeach}}
+	</table>
+</div>
+{{endif}}

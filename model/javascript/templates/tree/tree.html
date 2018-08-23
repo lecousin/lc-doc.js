@@ -1,0 +1,15 @@
+{{$foreach children child}}
+{{$id contentId}}
+<div class="lc-doc-tree-node lc-doc-{{child.type}}{{$if child.isStatic}}lc-doc-static{{endif}}">
+	{{$if child.children &amp;&amp; child.children.length &gt; 0}}
+	<div class="lc-doc-tree-node-expand-button lc-doc-tree-node-expanded" onclick="var content = document.getElementById('{{contentId}}');if (content.className.indexOf('expanded') > 0) { content.className = content.className.replace('expanded', 'collapsed'); this.className = this.className.replace('expanded', 'collapsed'); } else { content.className = content.className.replace('collapsed', 'expanded'); this.className = this.className.replace('collapsed', 'expanded'); }return false;"></div>
+	{{endif}}
+	<div class="lc-doc-tree-node-icon"></div>
+	<a href="model/{{child.fullpath}}.html" target="lc-doc-content">{{child.name}}</a>
+</div>
+{{$if child.children &amp;&amp; child.children.length &gt; 0}}
+<div class="lc-doc-tree-node-content lc-doc-tree-node-content-expanded" id="{{contentId}}">
+	{{$include tree.html child}}
+</div>
+{{endif}}
+{{endforeach}}

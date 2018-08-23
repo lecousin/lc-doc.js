@@ -1,0 +1,78 @@
+{
+	"name": "javascript",
+	"version": "0.1.0",
+	"rootElements": ["namespace", "class", "method"],
+	"elements": [
+		{
+			"type": "namespace",
+			"attributes": {
+				"description": "string"
+			},
+			"children": [
+				{
+					"type": "method",
+					"multiplicity": "*",
+					"forceAttributes": {
+						"isStatic": true
+					}
+				},
+				{
+					"type": "class",
+					"multiplicity": "*"
+				}
+			]
+		},
+		{
+			"type": "method",
+			"attributes": {
+				"description": "string",
+				"isStatic": "boolean"
+			},
+			"content": [
+				{
+					"type": "parameter",
+					"multiplicity": "*",
+					"attributes": {
+						"pname": "string",
+						"ptype": "string",
+						"description": "string"
+					},
+					"contentAsAttribute": "description"
+				},
+				{
+					"type": "return",
+					"multiplicity": "0..1",
+					"attributes": {
+						"type": "string",
+						"description": "string"
+					},
+					"contentAsAttribute": "description"
+				}
+			]
+		},
+		{
+			"type": "class",
+			"attributes": {
+				"description": "string",
+				"extends": "string"
+			},
+			"children": [
+				{
+					"type": "method",
+					"multiplicity": "*"
+				},
+				{
+					"type": "property",
+					"multiplicity": "*"
+				}
+			]
+		},
+		{
+			"type": "property",
+			"attributes": {
+				"description": "string",
+				"type": "string"
+			}
+		}
+	]
+}
