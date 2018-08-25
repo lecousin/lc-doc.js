@@ -26,7 +26,7 @@
 .lc-doc-tree-node .lc-doc-tree-node-icon {
 	width: 16px;
 	height: 16px;
-	background-repeat: norepeat;
+	background-repeat: no-repeat;
 	position: relative;
 }
 
@@ -45,6 +45,9 @@
 .lc-doc-tree-node.lc-doc-event .lc-doc-tree-node-icon {
 	background-image: url("images/event.gif");
 }
+.lc-doc-tree-node.lc-doc-constructor .lc-doc-tree-node-icon {
+	background-image: url("images/ctor.png");
+}
 
 .lc-doc-tree-node.lc-doc-static .lc-doc-tree-node-icon:before {
 	content: '';
@@ -52,7 +55,7 @@
 	bottom: 0px;
 	right: 0px;
 	background-image: url("images/static.png");
-	background-repeat: norepeat;
+	background-repeat: no-repeat;
 	width: 7px;
 	height: 7px;
 }

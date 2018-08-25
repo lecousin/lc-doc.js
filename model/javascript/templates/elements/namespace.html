@@ -1,9 +1,9 @@
-{{$filter children c methods c.type == 'method'}}
-{{$filter children child classes child.type == 'class'}}
+{{$filter children c methods c.elementType == 'method'}}
+{{$filter children child classes child.elementType == 'class'}}
 
 <h1>{{name}}</h1>
 
-{{description}}
+{{?description}}
 
 {{$if methods.length > 0}}
 <div>
@@ -13,7 +13,7 @@
 		{{$foreach methods m}}
 		<tr>
 			<td>{{m.name}}</td>
-			<td>{{m.description}}</td>
+			<td>{{?m.description}}</td>
 		</tr>
 		{{endforeach}}
 	</table>
@@ -28,7 +28,7 @@
 		{{$foreach classes c}}
 		<tr>
 			<td><a href="{{c.fullpath}}.html">{{c.name}}</a></td>
-			<td>{{c.description}}</td>
+			<td>{{?c.description}}</td>
 		</tr>
 		{{endforeach}}
 	</table>

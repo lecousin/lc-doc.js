@@ -10,6 +10,10 @@
 			},
 			"children": [
 				{
+					"type": "namespace",
+					"multiplicity": "*"
+				},
+				{
 					"type": "method",
 					"multiplicity": "*",
 					"forceAttributes": {
@@ -19,6 +23,27 @@
 				{
 					"type": "class",
 					"multiplicity": "*"
+				}
+			]
+		},
+		{
+			"type": "constructor",
+			"inherits": {
+				"name": "name"
+			},
+			"attributes": {
+				"description": "string"
+			},
+			"content": [
+				{
+					"type": "parameter",
+					"multiplicity": "*",
+					"attributes": {
+						"name": "string",
+						"type": "string",
+						"description": "string"
+					},
+					"contentAsAttribute": "description"
 				}
 			]
 		},
@@ -33,8 +58,8 @@
 					"type": "parameter",
 					"multiplicity": "*",
 					"attributes": {
-						"pname": "string",
-						"ptype": "string",
+						"name": "string",
+						"type": "string",
 						"description": "string"
 					},
 					"contentAsAttribute": "description"
@@ -57,6 +82,10 @@
 				"extends": "string"
 			},
 			"children": [
+				{
+					"type": "constructor",
+					"multiplicity": "1"
+				},
 				{
 					"type": "method",
 					"multiplicity": "*"

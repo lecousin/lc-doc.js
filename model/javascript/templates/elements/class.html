@@ -1,1 +1,50 @@
-<h1>Class {{name}}</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="../content.css"/>
+</head>
+<body class="lc-doc-content lc-doc-class">
+
+{{$filter children child methods child.elementType == 'method'}}
+
+<div class="lc-doc-class-title">
+	<div class="lc-doc-class-icon"></div>
+	Class
+	<code>{{fullpath}}</code>
+</div>
+
+{{$if typeof description == 'string' &amp;&amp; description.length > 0}}
+<h1>Description</h1>
+<div class="lc-doc-description">
+	{{description}}
+</div>
+{{endif}}
+
+{{$if methods.length > 0}}
+<h1>Methods</h1>
+{{$foreach methods method}}
+
+	{{$filter method.content c parameters c.elementType == 'parameter'}}
+	{{$filter method.content c returns c.elementType == 'return'}}
+	
+	<div class="lc-doc-method">
+		<div class="lc-doc-method-syntax"><a href="{{method.fullpath}}.html">
+			{{method.name}}({{$foreach parameters param}}{{$if paramIndex &gt; 0}}, {{endif}}{{param.name}}{{endforeach}})
+		</a></div>
+		{{$if returns.length > 0}}
+		<div class="lc-doc-method-returns">
+			{{returns[0].type}}
+		</div>
+		{{endif}}
+		{{$if typeof method.description == 'string'}}
+		<div class="lc-doc-method-description">
+			{{method.description}}
+		</div>
+		{{endif}}
+	</div>
+
+{{endforeach}}
+{{endif}}
+
+</body>
+</html>

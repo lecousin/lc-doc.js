@@ -1,6 +1,6 @@
 {{$foreach children child}}
 {{$id contentId}}
-<div class="lc-doc-tree-node lc-doc-{{child.type}}{{$if child.isStatic}}lc-doc-static{{endif}}">
+<div class="lc-doc-tree-node lc-doc-{{child.elementType}}{{$if child.isStatic}} lc-doc-static{{endif}}">
 	{{$if child.children &amp;&amp; child.children.length &gt; 0}}
 	<div class="lc-doc-tree-node-expand-button lc-doc-tree-node-expanded" onclick="var content = document.getElementById('{{contentId}}');if (content.className.indexOf('expanded') > 0) { content.className = content.className.replace('expanded', 'collapsed'); this.className = this.className.replace('expanded', 'collapsed'); } else { content.className = content.className.replace('collapsed', 'expanded'); this.className = this.className.replace('collapsed', 'expanded'); }return false;"></div>
 	{{endif}}

@@ -11,33 +11,48 @@ let options = require('minimist')(process.argv.slice(2), {
 
 console.log(options);
 
-if (!options.src) {
-	console.error("Missing src option");
+var onerror = function(e) {
+	console.error(e);
 	process.exit(1);
-}
+};
 
 if (!options.dest) {
 	console.error("Missing dest option");
 	process.exit(1);
 }
 
+if (!options.src) {
+	console.error("Missing src option");
+	process.exit(1);
+}
+
 const model = require('./lib/model.js');
 const templates = require("./lib/templates.js");
 
-var onerror = function(e) {
-	console.error(e);
-	process.exit(1);
+var generateDoc = function(src) {
+	model.loadDefinition(options.model);
+	model.loadContent(src)
+	.then(function(content) {
+		// TODO
+		console.log(require('util').inspect(content, false, null));
+		
+		templates.loadFunctions(options.templateFunctions);
+		templates.generate(content, options.templates, options.theme, options.dest)
+		.then(function() {
+			console.log("Done.");
+		}, onerror);
+	}, onerror);
 };
 
-model.loadDefinition(options.model);
-model.loadContent(options.src)
-.then(function(content) {
-	// TODO
-	console.log(require('util').inspect(content, false, null));
-	
-	templates.loadFunctions(options.templateFunctions);
-	templates.generate(content, options.templates, options.theme, options.dest)
-	.then(function() {
-		console.log("Done.");
+var generateModel = function(src, generator) {
+	require("./lib/generator.js").generate(src, generator)
+	.then(function(generatedPath) {
+		generateDoc(generatedPath + "/*.xml");
 	}, onerror);
-}, onerror);
+};
+
+if (options.generator) {
+	generateModel(options.src, options.generator);
+} else {
+	generateDoc(options.src);
+}

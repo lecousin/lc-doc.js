@@ -4,7 +4,8 @@
   "dependencies": {
     "minimist": "~1.2.0",
     "glob": "~7.1.2",
-    "xml-parse": "~0.3.0"
+    "node-xml-stream-parser": "~1.0.7",
+    "acorn": "~5.7.2"
   },
   "scripts": {
     "prebuild": "npm install"

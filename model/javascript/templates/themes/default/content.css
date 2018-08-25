@@ -1,0 +1,125 @@
+html {
+	margin: 0px;
+	padding: 0px; 
+}
+
+body.lc-doc-content {
+	padding: 10px;
+	font-family: "Open Sans",arial,x-locale-body,sans-serif;
+}
+
+.lc-doc-content h1 {
+	font-size: 28px;
+	border-bottom: 1px solid #C0C0C0;
+    padding-bottom: 3px;
+    margin: 10px 0px;
+}
+
+.lc-doc-content h2 {
+	font-size: 20px;
+	border-bottom: 1px solid #C0C0C0;
+    padding-bottom: 2px;
+    margin: 6px 5px;
+}
+
+a {
+	text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.lc-doc-content pre {
+	background-color: #E0F0F8;
+    padding: 5px;
+    border-left: 3px solid #7080F0;
+}
+
+/* icons */
+
+.lc-doc-class-icon {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url('images/class.png');
+	background-repeat: norepeat;
+	margin-right: 3px;
+}
+
+/* class */
+
+.lc-doc-class-title {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.lc-doc-class-title code {
+	margin: 0px 3px;
+	font-weight: bold;
+}
+
+/* method */
+
+.lc-doc-method {
+	margin-left: 20px;
+}
+
+.lc-doc-method .lc-doc-method-syntax {
+	display: inline-block;
+	font-family: consolas,"Liberation Mono",courier,monospace;
+	background-color: #E0E0E0;
+    font-weight: bold;
+    padding: 1px 2px;
+}
+
+.lc-doc-method .lc-doc-method-returns {
+	display: inline-block;
+	font-family: consolas,"Liberation Mono",courier,monospace;
+	color: #3f87a6;
+}
+.lc-doc-method .lc-doc-method-returns:before {
+	content: ':';
+	color: black;
+}
+
+.lc-doc-method .lc-doc-method-description {
+	margin: 5px 0px 5px 20px;
+}
+
+/* method parameter */
+
+.lc-doc-parameter {
+	margin-left: 20px;
+}
+
+.lc-doc-parameter .lc-doc-parameter-name {
+	display: inline-block;
+	font-family: consolas,"Liberation Mono",courier,monospace;
+	background-color: #E0E0E0;
+    font-weight: bold;
+    padding: 1px 2px;
+}
+
+.lc-doc-parameter .lc-doc-parameter-type {
+	display: inline-block;
+	font-family: consolas,"Liberation Mono",courier,monospace;
+	color: #3f87a6;
+}
+
+.lc-doc-parameter .lc-doc-parameter-description {
+	margin: 5px 0px 5px 20px;
+}
+
+/* method return */
+
+.lc-doc-return-type {
+	margin-left: 20px;
+	font-family: consolas,"Liberation Mono",courier,monospace;
+	color: #3f87a6;
+}
+
+.lc-doc-return-description {
+	margin: 5px 0px 5px 40px;
+}
