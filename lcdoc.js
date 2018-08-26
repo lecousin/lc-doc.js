@@ -1,5 +1,7 @@
 'use strict';
 
+var startTime = new Date().getTime();
+
 let options = require('minimist')(process.argv.slice(2), {  
 	default: {
 		model: "@/model/javascript/model.json",
@@ -27,33 +29,54 @@ if (!options.src) {
 	process.exit(1);
 }
 
+var getDelayString = function(ms) {
+	var s = "";
+	if (ms >= 60 * 60 * 1000) {
+		s += Math.floor(ms / (60 * 60 * 1000)) + 'h';
+		ms -= ms % (60 * 60 * 1000);
+	}
+	if (s.length > 0 || ms >= 60000) {
+		s += Math.floor(ms / 60000) + 'm';
+		ms -= ms % 60000;
+	}
+	if (s.length > 0 || ms >= 1000) {
+		s += Math.floor(ms / 1000) + 's';
+		ms -= ms % 1000;
+	}
+	if (s.length == 0)
+		return ms + " ms";
+	return s + ms;
+};
+
 const model = require('./lib/model.js');
-const templates = require("./lib/templates.js");
 
-var generateDoc = function(src) {
-	model.loadDefinition(options.model);
-	model.loadExternals(options.external);
-	model.loadContent(src)
-	.then(function(content) {
-		//console.log(require('util').inspect(content, false, null));
-		
-		templates.loadFunctions(options.templateFunctions);
-		templates.generate(model, options.templates, options.theme, options.dest)
-		.then(function() {
-			console.log("Done.");
+// load model definition
+model.loadDefinition(options.model);
+
+// load model (generate it if needed)
+var modelLoaded;
+if (options.generator)
+	modelLoaded = new Promise(function(success, error) {
+		require("./lib/generator.js").generate(options.src, options.generator)
+		.then(function(generatedPath) {
+			model.loadContent(generatedPath + "/*.xml").then(success, error);
 		}, onerror);
-	}, onerror);
-};
+	});
+else
+	modelLoaded = model.loadContent(options.src);
 
-var generateModel = function(src, generator) {
-	require("./lib/generator.js").generate(src, generator)
-	.then(function(generatedPath) {
-		generateDoc(generatedPath + "/*.xml");
-	}, onerror);
-};
+// load externals
+model.loadExternals(options.external);
 
-if (options.generator) {
-	generateModel(options.src, options.generator);
-} else {
-	generateDoc(options.src);
-}
+// init templates
+const templates = require("./lib/templates.js");
+var fctLoaded = templates.loadFunctions(options.templateFunctions);
+
+// launch generation
+Promise.all([modelLoaded, fctLoaded]).then(function(r) {
+	var content = r[0];
+	templates.generate(model, options.templates, options.theme, options.dest)
+	.then(function() {
+		console.log("Done in " + getDelayString(new Date().getTime() - startTime) + ".");
+	}, onerror);
+}, onerror);
