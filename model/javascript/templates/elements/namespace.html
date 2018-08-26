@@ -1,11 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="../content.css"/>
+</head>
+<body class="lc-doc-content lc-doc-namespace">
 {{$filter children c methods c.elementType == 'method'}}
 {{$filter children child classes child.elementType == 'class'}}
 
-<h1>{{name}}</h1>
+<h1>{{fullpath}}</h1>
 
 {{?description}}
 
-{{$if methods.length > 0}}
+{{$if methods.length &gt; 0}}
 <div>
 	<h1>Methods</h1>
 	<table>
@@ -20,17 +26,21 @@
 </div>
 {{endif}}
 
-{{$if classes.length > 0}}
-<div>
+{{$if classes.length &gt; 0}}
+<div class="lc-doc-classes">
 	<h1>Classes</h1>
-	<table>
-		<tr><th>Class</th><th>Description</th>
-		{{$foreach classes c}}
-		<tr>
-			<td><a href="{{c.fullpath}}.html">{{c.name}}</a></td>
-			<td>{{?c.description}}</td>
-		</tr>
-		{{endforeach}}
-	</table>
+	
+	{{$foreach classes c}}
+		<div class="lc-doc-classname">
+			<a href="{{c.fullpath}}.html">{{c.name}}</a>
+		</div>
+		{{$if typeof c.description == 'string' &amp;&amp; c.description.length > 0}}
+			<div class="lc-doc-class-description">
+				{{$first-sentence c.description}}
+			</div>
+		{{endif}}
+	{{endforeach}}
 </div>
 {{endif}}
+</body>
+</html>

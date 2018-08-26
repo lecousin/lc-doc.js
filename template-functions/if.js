@@ -6,7 +6,7 @@ module.exports = {
 		return new Promise(function(success, error) {
 			var condition;
 			try {
-				condition = ctx.ignore ? false : templates.evaluate(args, ctx.model);
+				condition = ctx.ignore ? false : templates.evaluate(args, ctx.model, ctx.context);
 			} catch (e) {
 				error("Invalid $if condition " + args + ": " + e);
 				return;

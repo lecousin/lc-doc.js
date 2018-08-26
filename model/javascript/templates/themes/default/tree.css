@@ -2,6 +2,9 @@
 	flex: none;
 	border-right: 1px solid black;
 	padding: 5px;
+	background-color: #F0F0F0;
+	margin-right: 3px;
+    box-shadow: 2px 2px 5px #C0C0C0;
 }
 
 .lc-doc-tree a {
@@ -39,7 +42,7 @@
 .lc-doc-tree-node.lc-doc-method .lc-doc-tree-node-icon {
 	background-image: url("images/method.gif");
 }
-.lc-doc-tree-node.lc-doc-attribute .lc-doc-tree-node-icon {
+.lc-doc-tree-node.lc-doc-property .lc-doc-tree-node-icon {
 	background-image: url("images/attribute.png");
 }
 .lc-doc-tree-node.lc-doc-event .lc-doc-tree-node-icon {
@@ -47,6 +50,8 @@
 }
 .lc-doc-tree-node.lc-doc-constructor .lc-doc-tree-node-icon {
 	background-image: url("images/ctor.png");
+	top: 5px;
+	left: 5px;
 }
 
 .lc-doc-tree-node.lc-doc-static .lc-doc-tree-node-icon:before {

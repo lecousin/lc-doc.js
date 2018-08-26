@@ -4,6 +4,42 @@
 	<link rel="stylesheet" type="text/css" href="../content.css"/>
 </head>
 <body class="lc-doc-content lc-doc-method">
-TODO
+{{$filter content c parameters c.elementType == 'parameter'}}
+
+<h1>Syntax</h1>
+	
+<pre><code>new {{classfullpath}}({{$foreach parameters param}}{{$if paramIndex &gt; 0}}, {{endif}}{{param.name}}{{endforeach}})</code></pre>
+	
+{{$if parameters.length &gt; 0}}
+<h2>Parameters</h2>
+
+{{$foreach parameters param}}
+<div class="lc-doc-parameter">
+	<div class="lc-doc-parameter-name">
+		{{param.name}}
+	</div>
+	{{$if typeof param.type == 'string'}}
+	<div class="lc-doc-parameter-type">
+		{{$type param.type}}
+	</div>
+	{{endif}}
+	{{$if typeof param.description == 'string'}}
+	<div class="lc-doc-parameter-description">
+		{{param.description}}
+	</div>
+	{{endif}}
+</div>
+{{endforeach}}
+{{endif}}
+
+{{$if typeof description == 'string' &amp;&amp; description.length &gt; 0}}
+<div class="lc-doc-description">
+	<h1>Description</h1>
+	<div>
+	{{description}}
+	</div>
+</div>
+{{endif}}
+
 </body>
 </html>

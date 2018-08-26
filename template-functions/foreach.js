@@ -11,7 +11,7 @@ module.exports = {
 				return;
 			}
 			var array;
-			try { array = ctx.ignore ? [] : templates.evaluate(args.substring(0, sep), ctx.model); }
+			try { array = ctx.ignore ? [] : templates.evaluate(args.substring(0, sep), ctx.model, ctx.context); }
 			catch (e) { error("Invalid $foreach array " + args.substring(0, sep) + ": " + e); return; }
 			var prevEnd = ctx.expectedEnd;
 			ctx.expectedEnd = "endforeach";

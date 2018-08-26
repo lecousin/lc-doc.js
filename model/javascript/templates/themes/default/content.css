@@ -5,18 +5,19 @@ html {
 
 body.lc-doc-content {
 	padding: 10px;
-	font-family: "Open Sans",arial,x-locale-body,sans-serif;
+	font-family: arial;
+	font-size: 14px;
 }
 
 .lc-doc-content h1 {
-	font-size: 28px;
+	font-size: 20px;
 	border-bottom: 1px solid #C0C0C0;
     padding-bottom: 3px;
     margin: 10px 0px;
 }
 
 .lc-doc-content h2 {
-	font-size: 20px;
+	font-size: 16px;
 	border-bottom: 1px solid #C0C0C0;
     padding-bottom: 2px;
     margin: 6px 5px;
@@ -29,6 +30,21 @@ a {
 
 a:hover {
 	text-decoration: underline;
+}
+
+a[target] {
+	margin-right: 12px;
+	position: relative;
+}
+a[target]:after {
+	content: '';
+	position: absolute;
+	top: 0px;
+	right: -12px;
+	width: 12px;
+	height: 12px;
+	background-image: url('images/external_link.png');
+	background-repeat: no-repeat;
 }
 
 .lc-doc-content pre {
@@ -48,6 +64,17 @@ a:hover {
 	margin-right: 3px;
 }
 
+/* class list */
+
+.lc-doc-classes .lc-doc-classname {
+	font-family: consolas,"Liberation Mono",courier,monospace;
+	color: #3f87a6;
+}
+
+.lc-doc-classes .lc-doc-class-description {
+	margin: 5px 0px 5px 20px;
+}
+
 /* class */
 
 .lc-doc-class-title {
@@ -58,6 +85,25 @@ a:hover {
 .lc-doc-class-title code {
 	margin: 0px 3px;
 	font-weight: bold;
+}
+
+.lc-doc-class-extended {
+	margin-left: 35px;
+	position: relative;
+	font-family: consolas,"Liberation Mono",courier,monospace;
+}
+.lc-doc-class-extended a {
+	color: #3f87a6;
+}
+.lc-doc-class-extended:before {
+	content: '';
+	width: 11px;
+	height: 12px;
+	background-image: url('images/extends.png');
+	background-repeat: no-repeat;
+	position: absolute;
+	top: 0px;
+	left: -13px;
 }
 
 /* method */
@@ -73,10 +119,15 @@ a:hover {
     font-weight: bold;
     padding: 1px 2px;
 }
+.lc-doc-method.lc-doc-static .lc-doc-method-syntax {
+	font-style: italic;
+}
 
 .lc-doc-method .lc-doc-method-returns {
 	display: inline-block;
 	font-family: consolas,"Liberation Mono",courier,monospace;
+}
+.lc-doc-method .lc-doc-method-returns a {
 	color: #3f87a6;
 }
 .lc-doc-method .lc-doc-method-returns:before {
@@ -105,6 +156,8 @@ a:hover {
 .lc-doc-parameter .lc-doc-parameter-type {
 	display: inline-block;
 	font-family: consolas,"Liberation Mono",courier,monospace;
+}
+.lc-doc-parameter .lc-doc-parameter-type a {
 	color: #3f87a6;
 }
 
@@ -117,9 +170,47 @@ a:hover {
 .lc-doc-return-type {
 	margin-left: 20px;
 	font-family: consolas,"Liberation Mono",courier,monospace;
+}
+.lc-doc-return-type a {
 	color: #3f87a6;
 }
 
 .lc-doc-return-description {
 	margin: 5px 0px 5px 40px;
+}
+
+/* method throw */
+
+.lc-doc-throw-description {
+	margin: 5px 0px 5px 20px;
+}
+
+/** property */
+
+.lc-doc-property {
+	margin-left: 20px;
+}
+
+.lc-doc-property .lc-doc-property-name {
+	display: inline-block;
+	font-family: consolas,"Liberation Mono",courier,monospace;
+	background-color: #E0E0E0;
+    font-weight: bold;
+    padding: 1px 2px;
+}
+
+.lc-doc-property .lc-doc-property-type {
+	display: inline-block;
+	font-family: consolas,"Liberation Mono",courier,monospace;
+}
+.lc-doc-property .lc-doc-property-type a {
+	color: #3f87a6;
+}
+.lc-doc-property .lc-doc-property-type:before {
+	content: ':';
+	color: black;
+}
+
+.lc-doc-property .lc-doc-property-description {
+	margin: 5px 0px 5px 20px;
 }

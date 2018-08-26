@@ -1,0 +1,14 @@
+{
+	"name": "MDN",
+	"baseUrl": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/",
+	"types": {
+		"String": "String",
+		"string": "String",
+		"Object": "Object",
+		"object": "Object",
+		"Number": "Number",
+		"number": "Number",
+		"Array": "Array",
+		"array": "Array"
+	}
+}

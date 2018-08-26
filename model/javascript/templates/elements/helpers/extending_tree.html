@@ -1,0 +1,10 @@
+{{$filter content c extended c.elementType == 'extends'}}
+{{$foreach extended ext}}
+<div class="lc-doc-class-extended">
+	{{$type ext.superclass}}
+	{{$element ext.superclass superclass}}
+	{{$if superclass}}
+	{{$include extending_tree.html superclass}}
+	{{endif}}
+</div>
+{{endforeach}}

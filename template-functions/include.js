@@ -19,15 +19,26 @@ module.exports = {
 			var filepath = args.substring(0, sep).trim();
 			var expr = args.substring(sep + 1).trim();
 			var model;
-			try { model = templates.evaluate(expr, ctx.model); }
+			try { model = templates.evaluate(expr, ctx.model, ctx.context); }
 			catch (e) { error("Invalid $include model expression " + expr + ": " + e); return; }
-			fs.readFile(path.dirname(ctx.filename) + '/' + filepath, function(err, content) {
-				if (err) error(err);
-				else templates.processTemplate(path.dirname(ctx.filename) + '/' + filepath, content, model)
+			//console.log("Include file " + filepath + " from " + ctx.context.template.filename);
+			fs.readFile(path.dirname(ctx.context.template.filename) + '/' + filepath, function(err, content) {
+				if (err) error("Unable to read included file " + filepath + " from " + ctx.context.template.filename + ": " + err);
+				else {
+					var context = {};
+					for (var name in ctx.context) context[name] = ctx.context[name];
+					context.template = {
+						filename: path.dirname(ctx.context.template.filename) + '/' + filepath,
+						content: content
+					};
+					var i = filepath.lastIndexOf('.');
+					context.template.extension = i < 0 ? "" : filepath.substring(i);
+					templates.processTemplate(context, model)
 					.then(function(res) {
 						ctx.out += res.out;
 						success(ctx);
 					}, error);
+				}
 			});
 		});
 	}

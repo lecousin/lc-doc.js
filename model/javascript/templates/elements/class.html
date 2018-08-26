@@ -5,40 +5,83 @@
 </head>
 <body class="lc-doc-content lc-doc-class">
 
+{{$filter children child constructors child.elementType == 'constructor'}}
+{{$set ctor constructors.length &gt; 0 ? constructors[0] : null}}
+
 {{$filter children child methods child.elementType == 'method'}}
+{{$filter children child properties child.elementType == 'property'}}
 
 <div class="lc-doc-class-title">
 	<div class="lc-doc-class-icon"></div>
 	Class
 	<code>{{fullpath}}</code>
 </div>
+{{$include helpers/extending_tree.html model}}
 
-{{$if typeof description == 'string' &amp;&amp; description.length > 0}}
+{{$if typeof description == 'string' &amp;&amp; description.length &gt; 0}}
 <h1>Description</h1>
 <div class="lc-doc-description">
 	{{description}}
 </div>
 {{endif}}
 
-{{$if methods.length > 0}}
+{{$if ctor}}
+<h1>Constructor</h1>
+
+{{$filter ctor.content c parameters c.elementType == 'parameter'}}
+
+<pre><code>new {{fullpath}}({{$foreach parameters param}}{{$if paramIndex &gt; 0}}, {{endif}}{{param.name}}{{endforeach}})</code></pre>
+
+{{?ctor.description}}
+
+<div>
+	<a href="{{ctor.fullpath}}.html">See constructor documentation</a>
+</div>
+
+{{endif}}
+
+{{$if methods.length &gt; 0}}
 <h1>Methods</h1>
 {{$foreach methods method}}
 
 	{{$filter method.content c parameters c.elementType == 'parameter'}}
 	{{$filter method.content c returns c.elementType == 'return'}}
 	
-	<div class="lc-doc-method">
+	<div class="lc-doc-method{{$if method.isStatic}} lc-doc-static{{endif}}">
 		<div class="lc-doc-method-syntax"><a href="{{method.fullpath}}.html">
-			{{method.name}}({{$foreach parameters param}}{{$if paramIndex &gt; 0}}, {{endif}}{{param.name}}{{endforeach}})
+			{{$if method.isStatic}}{{fullpath}}.{{endif}}{{method.name}}({{$foreach parameters param}}{{$if paramIndex &gt; 0}}, {{endif}}{{param.name}}{{endforeach}})
 		</a></div>
-		{{$if returns.length > 0}}
+		{{$if returns.length &gt; 0}}
 		<div class="lc-doc-method-returns">
-			{{returns[0].type}}
+			{{$type returns[0].type}}
 		</div>
 		{{endif}}
 		{{$if typeof method.description == 'string'}}
 		<div class="lc-doc-method-description">
-			{{method.description}}
+			{{$first-sentence method.description}}
+		</div>
+		{{endif}}
+	</div>
+
+{{endforeach}}
+{{endif}}
+
+{{$if properties.length &gt; 0}}
+<h1>Properties</h1>
+{{$foreach properties prop}}
+
+	<div class="lc-doc-property">
+		<div class="lc-doc-property-name"><a href="{{prop.fullpath}}.html">
+			{{prop.name}}
+		</a></div>
+		{{$if typeof prop.type == 'string'}}
+		<div class="lc-doc-property-type">
+			{{$type prop.type}}
+		</div>
+		{{endif}}
+		{{$if typeof prop.description == 'string'}}
+		<div class="lc-doc-property-description">
+			{{$first-sentence prop.description}}
 		</div>
 		{{endif}}
 	</div>

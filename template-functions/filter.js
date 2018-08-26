@@ -31,7 +31,7 @@ module.exports = {
 			var condition = args.substring(sep + 1).trim();
 			
 			try {
-				array = templates.evaluate(array, ctx.model);
+				array = templates.evaluate(array, ctx.model, ctx.context);
 			} catch (e) {
 				error("Invalid array in $filter " + array + ": " + e);
 				return;
@@ -45,7 +45,7 @@ module.exports = {
 				m[arrayElementVariable] = array[i];
 				m[arrayElementVariable + 'Index'] = i;
 				try {
-					if (templates.evaluate(condition, m))
+					if (templates.evaluate(condition, m, ctx.context))
 						targetArray.push(array[i]);
 				} catch (e) {
 					// ignore

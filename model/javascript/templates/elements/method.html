@@ -6,8 +6,10 @@
 <body class="lc-doc-content lc-doc-method">
 {{$filter content c parameters c.elementType == 'parameter'}}
 {{$filter content c returns c.elementType == 'return'}}
+{{$filter content c throws c.elementType == 'throw'}}
+{{$if typeof isStatic == 'undefined'}}{{$set isStatic false}}{{endif}}
 
-{{$if typeof description == 'string' &amp;&amp; description.length > 0}}
+{{$if typeof description == 'string' &amp;&amp; description.length &gt; 0}}
 <div class="lc-doc-description">
 	<h1>Description</h1>
 	<div>
@@ -18,9 +20,9 @@
 
 <h1>Syntax</h1>
 	
-<pre><code>{{name}}({{$foreach parameters param}}{{$if paramIndex &gt; 0}}, {{endif}}{{param.name}}{{endforeach}})</code></pre>
+<pre><code>{{$if isStatic}}{{fullpath}}{{endif}}{{$if !isStatic}}{{name}}{{endif}}({{$foreach parameters param}}{{$if paramIndex &gt; 0}}, {{endif}}{{param.name}}{{endforeach}})</code></pre>
 	
-{{$if parameters.length > 0}}
+{{$if parameters.length &gt; 0}}
 <h2>Parameters</h2>
 
 {{$foreach parameters param}}
@@ -30,7 +32,7 @@
 	</div>
 	{{$if typeof param.type == 'string'}}
 	<div class="lc-doc-parameter-type">
-		{{param.type}}
+		{{$type param.type}}
 	</div>
 	{{endif}}
 	{{$if typeof param.description == 'string'}}
@@ -42,15 +44,24 @@
 {{endforeach}}
 {{endif}}
 
-{{$if returns.length > 0}}
+{{$if returns.length &gt; 0}}
 <h2>Return</h2>
 
 <div class="lc-doc-return-type">
-	{{returns[0].type}}
+	{{$type returns[0].type}}
 </div>
 <div class="lc-doc-return-description">
 	{{?returns[0].description}}
 </div>
 {{endif}}
+
+{{$if throws.length &gt; 0}}
+<h2>Throw</h2>
+
+<div class="lc-doc-throw-description">
+	{{throws[0].description}}
+</div>
+{{endif}}
+
 </body>
 </html>

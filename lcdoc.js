@@ -5,7 +5,8 @@ let options = require('minimist')(process.argv.slice(2), {
 		model: "@/model/javascript/model.json",
 		templates: "@/model/javascript/templates",
 		theme: "default",
-		templateFunctions: "@/template-functions/**/*.js"
+		templateFunctions: "@/template-functions/**/*.js",
+		external: "@/model/javascript/external/mdn.json"
 	}
 });
 
@@ -31,13 +32,13 @@ const templates = require("./lib/templates.js");
 
 var generateDoc = function(src) {
 	model.loadDefinition(options.model);
+	model.loadExternals(options.external);
 	model.loadContent(src)
 	.then(function(content) {
-		// TODO
-		console.log(require('util').inspect(content, false, null));
+		//console.log(require('util').inspect(content, false, null));
 		
 		templates.loadFunctions(options.templateFunctions);
-		templates.generate(content, options.templates, options.theme, options.dest)
+		templates.generate(model, options.templates, options.theme, options.dest)
 		.then(function() {
 			console.log("Done.");
 		}, onerror);
