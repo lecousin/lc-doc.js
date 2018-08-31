@@ -75,6 +75,17 @@ a[target]:after {
 	margin: 5px 0px 5px 20px;
 }
 
+/* namespace list */
+
+.lc-doc-namespaces .lc-doc-namespace-name {
+	font-family: consolas,"Liberation Mono",courier,monospace;
+	color: #3f87a6;
+}
+
+.lc-doc-namespaces .lc-doc-namespace-description {
+	margin: 5px 0px 5px 20px;
+}
+
 /* class */
 
 .lc-doc-class-title {
@@ -97,13 +108,13 @@ a[target]:after {
 }
 .lc-doc-class-extended:before {
 	content: '';
-	width: 11px;
-	height: 12px;
+	width: 12px;
+	height: 11px;
 	background-image: url('images/extends.png');
 	background-repeat: no-repeat;
 	position: absolute;
 	top: 0px;
-	left: -13px;
+	left: -14px;
 }
 
 /* method */

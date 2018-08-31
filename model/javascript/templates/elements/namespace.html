@@ -5,7 +5,9 @@
 </head>
 <body class="lc-doc-content lc-doc-namespace">
 {{$filter children c methods c.elementType == 'method'}}
+{{$filter children c properties c.elementType == 'property'}}
 {{$filter children child classes child.elementType == 'class'}}
+{{$filter children child namespaces child.elementType == 'namespace'}}
 
 <h1>{{fullpath}}</h1>
 
@@ -14,16 +16,49 @@
 {{$if methods.length &gt; 0}}
 <div>
 	<h1>Methods</h1>
-	<table>
-		<tr><th>Method</th><th>Description</th>
-		{{$foreach methods m}}
-		<tr>
-			<td>{{m.name}}</td>
-			<td>{{?m.description}}</td>
-		</tr>
-		{{endforeach}}
-	</table>
+	{{$foreach methods m}}
+		{{$filter m.content c parameters c.elementType == 'parameter'}}
+		{{$filter m.content c returns c.elementType == 'return'}}
+	
+		<div class="lc-doc-method lc-doc-static">
+			<div class="lc-doc-method-syntax">
+				<a href="{{m.fullpath}}.html">{{m.name}}</a>({{$foreach parameters param}}{{$if paramIndex &gt; 0}}, {{endif}}{{param.name}}{{endforeach}})
+			</div>
+			{{$if returns.length &gt; 0}}
+			<div class="lc-doc-method-returns">
+				{{$type returns[0].type}}
+			</div>
+			{{endif}}
+			{{$if typeof m.description == 'string' &amp;&amp; m.description.length > 0}}
+				<div class="lc-doc-method-description">
+					{{$first-sentence m.description}}
+				</div>
+			{{endif}}
+		</div>
+	{{endforeach}}
 </div>
+{{endif}}
+
+{{$if properties.length &gt; 0}}
+<h1>Properties</h1>
+{{$foreach properties prop}}
+
+	<div class="lc-doc-property lc-doc-static">
+		<div class="lc-doc-property-name"><a href="{{prop.fullpath}}.html">
+			{{prop.name}}
+		</a></div>
+		{{$if typeof prop.type == 'string'}}
+		<div class="lc-doc-property-type">
+			{{$type prop.type}}
+		</div>
+		{{endif}}
+		{{$if typeof prop.description == 'string'}}
+		<div class="lc-doc-property-description">
+			{{$first-sentence prop.description}}
+		</div>
+		{{endif}}
+	</div>
+{{endforeach}}
 {{endif}}
 
 {{$if classes.length &gt; 0}}
@@ -37,6 +72,23 @@
 		{{$if typeof c.description == 'string' &amp;&amp; c.description.length > 0}}
 			<div class="lc-doc-class-description">
 				{{$first-sentence c.description}}
+			</div>
+		{{endif}}
+	{{endforeach}}
+</div>
+{{endif}}
+
+{{$if namespaces.length &gt; 0}}
+<div class="lc-doc-namespaces">
+	<h1>Namespaces</h1>
+	
+	{{$foreach namespaces ns}}
+		<div class="lc-doc-namespace-name">
+			<a href="{{ns.fullpath}}.html">{{ns.name}}</a>
+		</div>
+		{{$if typeof ns.description == 'string' &amp;&amp; ns.description.length > 0}}
+			<div class="lc-doc-namespace-description">
+				{{$first-sentence ns.description}}
 			</div>
 		{{endif}}
 	{{endforeach}}

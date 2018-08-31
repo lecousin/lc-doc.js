@@ -15,6 +15,13 @@
 					"multiplicity": "*"
 				},
 				{
+					"type": "property",
+					"multiplicity": "*",
+					"forceAttributes": {
+						"isStatic": true
+					}
+				},
+				{
 					"type": "method",
 					"multiplicity": "*",
 					"forceAttributes": {
